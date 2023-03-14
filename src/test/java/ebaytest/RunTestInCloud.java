@@ -1,11 +1,13 @@
 package ebaytest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class RunTestInCloud {
+public class RunTestInCloud {   // All test Ok
 
     private static WebDriver driver;
     private static final Logger logger = Logger.getLogger(RunTestInCloud.class);
@@ -47,8 +49,13 @@ public class RunTestInCloud {
 
     @BeforeMethod
     private static void setupBrowser() {
-        System.setProperty("webdriver.chrome.driver", "BrowserDriver/windows/chromedriver.exe");
-        driver = new ChromeDriver();
+//        For Headless:
+//        ChromeOptions co=new ChromeOptions();
+//        co.setHeadless(true);
+//        driver=WebDriverManager.chromedriver().capabilities(co).create();
+
+        driver=WebDriverManager.chromedriver().create();
+
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -72,124 +79,124 @@ public class RunTestInCloud {
         driver.navigate().back();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void testGoogleSearchBox() throws InterruptedException {
         driver.get("https://www.google.com/");
-        driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")).sendKeys("Belayet");
-        //logger.info("Hi, Successfully Find Search Box");
+        driver.findElement(By.name("q")).sendKeys("Belayet");
+        logger.info("Hi, Successfully Find Search Box");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void testYoutubeSearchBox() {
         driver.get("https://www.amazon.com/");
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Mobile");
         driver.findElement(By.cssSelector("#nav-search-submit-text > input")).click();
-        //logger.info("Hi, Successfully Click the Search Button");
+        logger.info("Hi, Successfully Click the Search Button");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void testSearchBoxGoogle() {
         driver.get("https://www.google.com/");
-        driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")).sendKeys("Dhaka");
-        //logger.info("Hi, Successfully Search Box");
+        driver.findElement(By.name("q")).sendKeys("Dhaka");
+        logger.info("Hi, Successfully Search Box");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void testSearchBoxYoutube() {
         driver.get("https://www.amazon.com/");
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Mobile");
         driver.findElement(By.cssSelector("#nav-search-submit-text > input")).click();
-        //logger.info("Hi, Successfully Find Search Box");
+        logger.info("Hi, Successfully Find Search Box");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void checkUrl() {
         driver.get("https://www.google.com/");
         String actualUrl = driver.getCurrentUrl();
         String expectedUrl = "https://www.google.com/";
         Assert.assertEquals(actualUrl, expectedUrl, "Hi, Url Not Match");
-        //logger.info("Hi, Assertion Successfull");
+        logger.info("Hi, Assertion Successfull");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void checkLogo() {
         driver.get("https://www.ebay.com/");
         boolean actualDisplay = driver.findElement(By.id("gh-la")).isDisplayed();
         //Assert.assertEquals(actualDisplay,true,"Hi, Logo Not Display");
         Assert.assertTrue(actualDisplay, "Hi, Logo Not Display");      //Alternative way:
-        //logger.info("Hi, Logo can visible");
+        logger.info("Hi, Logo can visible");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void checkBox2() {
         driver.get("https://www.ebay.com/");
         driver.findElement(By.xpath("//*[@id='gh-ac']")).sendKeys("dslr camera");
         driver.findElement(By.xpath("//*[@id='gh-btn']")).click();
         String actualText = driver.findElement(By.xpath("//h1[@class='srp-controls__count-heading']")).getText();
         Assert.assertTrue(actualText.contains("dslr camera"), "Hi, Tex Not Match");
-        // logger.info("Hi, Successfully Search Box");
+         logger.info("Hi, Successfully Search Box");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void dropDown() {          // Scroll Down
         driver.get("https://www.ebay.com/");
         WebElement dropDownElement = driver.findElement(By.id("gh-cat"));
         Select select = new Select(dropDownElement);
         select.selectByVisibleText("Travel");
         driver.findElement(By.id("gh-btn")).click();
-        //logger.info("Hi, Successfully Click");
+        logger.info("Hi, Successfully Drop Down");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void selectByMouseHover() {       // Mouse Hover
         driver.get("https://www.ebay.com/");
         WebElement item = driver.findElement(By.linkText("Motors"));
         Actions actions = new Actions(driver);
         actions.moveToElement(item).build().perform();
         driver.findElement(By.linkText("Motorcycles")).click();
-        //logger.info("Hi, Successfully Click Link Text");
+        logger.info("Hi, Successfully Click Link Text");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void scrollDown() {
         driver.get("https://www.ebay.com/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1500)");
-        //logger.info("Hi, Successfully Scroll Down");
+        logger.info("Hi, Successfully Scroll Down");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void scrollDownToElement() {
         driver.get("https://www.ebay.com/");
         WebElement element = driver.findElement(By.linkText("Security center"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
-        //logger.info("Hi, Successfully Scroll down to Element");
+        logger.info("Hi, Successfully Scroll down to Element");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void dragNdrop() {     // Drag and Drop
         driver.get("http://demo.guru99.com/test/drag_drop.html");
         WebElement source = driver.findElement(By.xpath("(//li[@id='fourth'])[1]"));
         WebElement destination = driver.findElement(By.id("amt7"));
         Actions actions = new Actions(driver);
         actions.dragAndDrop(source, destination).build().perform();
-        //logger.info("Hi, Successfully Drag and Draw");
+        logger.info("Hi, Successfully Drag and Draw");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void scrollToFrame() {
         driver.get("https://demoqa.com/frames");
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -197,53 +204,53 @@ public class RunTestInCloud {
         driver.switchTo().frame("frame2");
         js.executeScript("window.scrollBy(0,1000)");    // It's Scroll the 2nd Frama
         driver.switchTo().defaultContent();
-        //logger.info("Hi, Successfully scroll Frame");
+        logger.info("Hi, Successfully scroll Frame");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void extractElementFromDropDownOptions() {
         driver.get("https://www.ebay.com/");
         List<WebElement> dropDownList = driver.findElements(By.xpath("//*[@id='gh-cat']/option"));
         System.out.println(dropDownList.size());
         for (WebElement ddl : dropDownList) {
             System.out.println(ddl.getText());                  // Display Options Texts
-            //System.out.println(ddl.getAttribute("value"));    // Display Options values
+            System.out.println(ddl.getAttribute("value"));// Display Options values
         }
-        //logger.info("Successfully Display Option Texts");
+        logger.info("Successfully Display Option Texts");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public void clickOnRegister() {
         driver.get("https://www.ebay.com/");
         driver.findElement(By.linkText("Security center")).click();
         navigateBack();
-        //logger.info("Hi, Successfully Click Link Text Register");
+        logger.info("Hi, Successfully Click Link Text Register");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public void selectFromDropdown() {
         driver.get("https://www.ebay.com/");
         WebElement dropdownMenu = driver.findElement(By.id("gh-cat"));
         Select select = new Select(dropdownMenu);
         select.selectByVisibleText("Music");
-        //logger.info("Hi, Successfully Select from Drop Box");
+        logger.info("Hi, Successfully Select from Drop Box");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public void handlePopupWindow() {    // Popup menue can't view properly
         driver.get("http://demo.guru99.com/test/delete_customer.php");
         driver.findElement(By.name("cusid")).sendKeys("1");
         driver.findElement(By.name("submit")).click();
         driver.switchTo().alert().accept();
-        //logger.info("Hi, Successfully Handle Popup Window");
+        logger.info("Hi, Successfully Handle Popup Window");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public void handleMultipleWindow() {
         driver.get("https://www.google.com/gmail/about/#");
         driver.findElement(By.linkText("Create an account")).click();
@@ -262,11 +269,11 @@ public class RunTestInCloud {
         driver.findElement(By.xpath("//*[@id='accountDetailsNext']")).click();
         String actualText = driver.findElement(By.xpath("//*[@id='view_container']/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[3]/div[2]/div[2]/span")).getText();
         Assert.assertEquals(actualText, "Those passwords didn’t match. Try again.", "Hi, Test fail");
-        //logger.info("Hi, Successfully Handel Multiple Window");
+        logger.info("Hi, Successfully Handel Multiple Window");
         closeBrowser();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true)//ok
     public static void checkBox1() {
         driver.get("https://www.bestbuy.com/");
         try {
@@ -280,7 +287,7 @@ public class RunTestInCloud {
         String actualText = driver.findElement(By.xpath("//h1[@class='search-title']")).getText();
         String expectedText = "\"dslr camera\"";
         Assert.assertEquals(actualText, expectedText, "Hi, Text Not Match");
-        //logger.info("Hi, Successfully Click search Box");
+        logger.info("Hi, Successfully Click search Box");
         closeBrowser();
     }
 }

@@ -1,10 +1,7 @@
 package ebaytest;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -29,12 +26,12 @@ public class TestNewClass {
         driver = new ChromeDriver();
         driver.get(url);
     }
+
     public static void setupFirefoxBrowser(String url) {
         System.setProperty("webdriver.gecko.driver", "BrowserDriver/Windows/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get(url);
     }
-
 
 
     // Another approach to setup Browser Combined
@@ -52,7 +49,6 @@ public class TestNewClass {
         driver.manage().window().maximize();
         driver.get(url);
     }
-
 
 
     public static void closeBrowser() {
@@ -74,7 +70,6 @@ public class TestNewClass {
     }
 
 
-
     // Run Test case using Individual Browser setup
     @Test(enabled = true)
     public static void testGoogleSearchBox() throws InterruptedException {
@@ -83,6 +78,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Find Search Box");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void testYoutubeSearchBox() {         //
         setupChromeBrowser("https://www.amazon.com/");
@@ -91,7 +87,6 @@ public class TestNewClass {
         logger.info("Hi, Successfully Click the Search Button");
         closeBrowser();
     }
-
 
 
     // Run Test case using Combined Browser setup
@@ -111,6 +106,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Find Search Box");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void checkUrl() {
         setupBrowser("chrome", "https://www.google.com/");
@@ -120,6 +116,7 @@ public class TestNewClass {
         logger.info("Hi, Assertion Successfull");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void checkLogo() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -129,6 +126,7 @@ public class TestNewClass {
         logger.info("Hi, Logo can visible");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void checkBox2() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -144,6 +142,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Search Box");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void dropDown() {          // Scroll Down
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -155,6 +154,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Click");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void selectByMouseHover() {       // Mouse Hover
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -165,6 +165,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Click Link Text");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void scrollDown() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -173,6 +174,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Scroll Down");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void scrollDownToElement() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -182,6 +184,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Scroll down to Element");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void dragNdrop() {     // Drag and Drop
         setupBrowser("chrome", "http://demo.guru99.com/test/drag_drop.html");
@@ -192,6 +195,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully Drag and Draw");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void scrollToFrame() {
         setupBrowser("chrome", "https://demoqa.com/frames");
@@ -203,6 +207,7 @@ public class TestNewClass {
         logger.info("Hi, Successfully scroll Frame");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void extractElementFromDropDownOptions() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -215,6 +220,7 @@ public class TestNewClass {
         logger.info("Successfully Display Option Texts");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public void clickOnRegister() {
         setupBrowser("chrome", "https://www.ebay.com/");
@@ -223,35 +229,43 @@ public class TestNewClass {
         logger.info("Hi, Successfully Click Link Text Register");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public void selectFromDropdown() {
         setupBrowser("chrome", "https://www.ebay.com/");
+        waitFor(3);
         WebElement dropdownMenu = driver.findElement(By.id("gh-cat"));
+        waitFor(3);
         Select select = new Select(dropdownMenu);
         select.selectByVisibleText("Music");
+        waitFor(3);
         logger.info("Hi, Successfully Select from Drop Box");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public void handlePopupWindow() {    // Popup menue can't view properly
         setupBrowser("chrome", "http://demo.guru99.com/test/delete_customer.php");
-        driver.findElement(By.name("cusid")).sendKeys("1");
+        waitFor(3);
+        driver.findElement(By.name("cusid")).sendKeys("11");
         driver.findElement(By.name("submit")).click();
-//        String dataFromAlert=driver.switchTo().alert().getText();
-//        System.out.println(dataFromAlert);
+        waitFor(3);
+        String dataFromAlert = driver.switchTo().alert().getText();
+        waitFor(5);
+        System.out.println(dataFromAlert);
         driver.switchTo().alert().accept();
-        //driver.switchTo().alert().accept();
         logger.info("Hi, Successfully Handle Popup Window");
         closeBrowser();
     }
+
     @Test(enabled = true)
     public static void checkBox1() {
         setupBrowser("chrome", "https://www.bestbuy.com/");
-        
+
         // This try block used  when an unexpected popup will appear
-        try{
+        try {
             driver.findElement(By.xpath("//button[@class='c-close-icon c-modal-close-icon']")).click();
-        }catch (Exception ignore){
+        } catch (Exception ignore) {
 
         }
         waitFor(2);
@@ -264,14 +278,13 @@ public class TestNewClass {
         closeBrowser();
     }
 
-    //************************* Problem
     @Test(enabled = true)
     public void handleMultipleWindow() {
         setupBrowser("chrome", "https://www.google.com/gmail/about/#");
         driver.findElement(By.linkText("Create an account")).click();
+        waitFor(2);
         Set<String> afterOpenNewWindow = driver.getWindowHandles();
         String currentWindow = driver.getWindowHandle();
-
         for (String win : afterOpenNewWindow) {
             if (!win.equalsIgnoreCase(currentWindow)) {
                 driver.switchTo().window(win);
@@ -281,6 +294,7 @@ public class TestNewClass {
         driver.findElement(By.xpath("//*[@id='lastName']")).sendKeys("Hossain");
         driver.findElement(By.xpath("//*[@id='passwd']/div[1]/div/div[1]/input")).sendKeys("123456789");
         driver.findElement(By.xpath("//*[@name='ConfirmPasswd']")).sendKeys("12345678");
+        waitFor(2);
         driver.findElement(By.xpath("//*[@id='accountDetailsNext']")).click();
         String actualText = driver.findElement(By.xpath("//*[@id='view_container']/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[3]/div[2]/div[2]/span")).getText();
         Assert.assertEquals(actualText, "Those passwords didn’t match. Try again.", "Hi, Test fail");
@@ -288,4 +302,199 @@ public class TestNewClass {
         closeBrowser();
     }
 
+    // CNN.COM Tests
+    @Test(enabled = true)
+    public void loginOutPage() {
+        setupBrowser("chrome", "https://www.cnn.com");
+        driver.findElement(By.xpath("//div[@id='nav__plain-header']//div[6]//div[1]//*[local-name()='svg']")).click();
+        waitFor(2);
+        driver.findElement((By.xpath("//input[@aria-label='Email address']"))).sendKeys("its.belayet@gmail.com");
+        driver.findElement((By.xpath("//input[@aria-label='Password']"))).sendKeys("Miru@1964");
+        driver.findElement((By.xpath("//button[@id='login-form-button']"))).click();
+        waitFor(3);
+        driver.findElement(By.xpath("//div[@class='Box-sc-1fet97o-0 hyVhvp']")).click();
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public void navigateTab() {
+        setupBrowser("chrome", "https://www.cnn.com");
+        driver.findElement(By.xpath("//a[@type='collapsed'][normalize-space()='Entertainment']")).click();
+        waitFor(3);
+        boolean chkDisplay = driver.findElement(By.xpath("//div[@class='Cell-i0zvfi-0 sc-kgAjT jYQwPK']")).isDisplayed();
+        Assert.assertTrue(chkDisplay, "Logo not Display");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public void readNews() {
+        setupBrowser("chrome", "https://www.cnn.com");
+        driver.findElement(By.xpath("//strong[contains(text(),'Unprecedented Northwest heat wave goes into unchar')] ")).click();
+        waitFor(3);
+        String newsHead = driver.findElement(By.xpath("//h1[@class='pg-headline']")).getText();
+        System.out.println(newsHead);
+        Assert.assertTrue(newsHead.contains("The Northwest heat wave"), "Test not match");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public void searchNews() {
+        setupBrowser("chrome", "https://www.cnn.com");
+        driver.findElement(By.xpath("//div[@class='Flex-sc-1sqrs56-0 sc-kvZOFW cJcAaN']//button[@class='sc-jhAzac sc-gisBJw hioqcg']")).click();
+        driver.findElement(By.xpath("//input[@id='header-search-bar']")).sendKeys("politics");
+        driver.findElement(By.xpath("//*[@id='header-nav-container']/div/div[2]/div/div[1]/form/button/div[1]")).click();
+        String searchResust = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div[2]/div/div[1]/strong")).getText();
+        Assert.assertTrue(searchResust.contains("politics"), "Resust not match");
+        closeBrowser();
+    }
+
+    //****** Cigna.com ***************
+    @Test(enabled = true)
+    public void loginCigna() {
+        setupBrowser("chrome", "https://www.cigna.com");
+        driver.findElement(By.xpath("//li[@class='list-inline-item']//a[@class='btn btn-sm btn-primary'][normalize-space()='Log in to myCigna']")).click();
+        waitFor(2);
+
+        Set<String> newWindow = driver.getWindowHandles();
+        String currentWindow = driver.getWindowHandle();
+        for (String win : newWindow) {
+            if (!win.equalsIgnoreCase(currentWindow)) {
+                driver.switchTo().window(win);
+            }
+        }
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("Mohammed");
+        driver.findElement(By.xpath("//*[@id='password']")).sendKeys("Hossain");
+        driver.findElement(By.xpath("//input[@id='loginbutton']")).click();
+        String errMessage = driver.findElement(By.xpath("//div[@id='alertmessage']")).getText();
+        Assert.assertTrue(errMessage.contains("The username and password combination you entered does not match"), "Result not match");
+
+//         String errorMessage=driver.findElement(By.xpath("/html/body/main/div/h2")).getText();
+//         Assert.assertTrue(errorMessage.contains("Are you human?"), "Result not match");
+        waitFor(3);
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public static void selectMouseHover() {
+        setupBrowser("chrome", "https://www.cigna.com");
+        WebElement item = driver.findElement(By.linkText("Individuals and Families"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(item).build().perform();
+        driver.findElement(By.linkText("Health and Wellness")).click();
+        String searchText = driver.findElement(By.xpath("//*[@id='scroll-hero']/div[2]/div/div[2]/h1")).getText();
+        Assert.assertTrue(searchText.contains("The Better Health Challenge. Accepted"), "Result not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public void selectformLink() {
+        setupBrowser("chrome", "https://www.cigna.com");
+        driver.findElement(By.linkText("Find a Form")).click();
+        String searchText = driver.findElement(By.xpath("//*[@id='contact-us-ct']/h1")).getText();
+        Assert.assertTrue(searchText.contains("CUSTOMER FORMS"), "Result not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    // Citi Bank
+    @Test(enabled = true)
+    public void citiLogin() {
+        setupBrowser("chrome", "https://www.citibank.com");
+        waitFor(3);
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("Belayet");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Hossain");
+        driver.findElement(By.xpath("//button[@id='signInBtn']")).click();
+        String searchText = driver.findElement(By.xpath(" //*[@id='logInForm']/form/div/citi-errors/div/div/div/span[1]")).getText();
+        Assert.assertTrue(searchText.contains("Trouble signing on?"), "Result not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public static void mouseHover() {
+        setupBrowser("chrome", "https://www.citibank.com");
+        WebElement item = driver.findElement(By.linkText("Credit Cards"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(item).build().perform();
+        driver.findElement(By.linkText("Travel Credit Cards")).click();
+        String searchText = driver.findElement(By.xpath(" //*[@id='ca-DD-mppTitle']/h1")).getText();
+        Assert.assertTrue(searchText.contains("Travel Rewards Credit Cards"), "Result not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public static void selectFromMenu() {
+        setupBrowser("chrome", "https://www.citibank.com");
+        WebElement item = driver.findElement(By.linkText("Banking"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(item).build().perform();
+        driver.findElement(By.linkText("Savings")).click();
+        String xyz = driver.findElement(By.xpath("//h1[normalize-space()='Savings Accounts']")).getText();
+        Assert.assertTrue(xyz.contains("Savings Accounts"), "Result not match");
+        waitFor(4);
+    }
+
+    @Test(enabled = true)
+    public static void fromDropdown() {     //xxx
+        setupBrowser("chrome", "https://www.citibank.com");
+        WebElement item = driver.findElement(By.linkText("Banking"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(item).build().perform();
+        driver.findElement(By.linkText("Rates")).click();
+        //driver.switchTo();
+        driver.findElement(By.xpath("//*[@id='zipcode']")).sendKeys("10473");
+        driver.findElement(By.xpath("//*[@id='37e8a64a-d22e-6cee-4a71-29ec47e93cef']")).click();
+        waitFor(4);
+    }
+
+    @Test(enabled = true)
+    public void searchItem() {
+        setupBrowser("chrome", "https://www.citibank.com");
+        driver.findElement(By.xpath("//*[@id='personetics-citi-menu']")).click();
+        driver.findElement(By.xpath("//*[@id='autocomplete-search']")).sendKeys("personal loan");
+        driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+        String searchText = driver.findElement(By.xpath("//b[normalize-space()='personal loan']")).getText();
+        Assert.assertTrue(searchText.contains("personal loan"), "Result not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    // Facebook
+    @Test(enabled = true)
+    public void searchName() {
+        setupBrowser("firefox", "https://www.facebook.com");
+        driver.findElement(By.xpath("//input[@aria-label='Email or Phone Number']")).sendKeys("Labonyo Shahid");
+        driver.findElement(By.xpath("//input[@aria-label='Password']")).sendKeys("google.com");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        driver.findElement(By.xpath("//input[@placeholder='Search Facebook']")).sendKeys("hiru");
+        driver.findElement(By.xpath("//div[@class='thwo4zme taijpn5t tv7at329 j83agx80 k77z8yql qs9ysxi8 arfg74bv n00je7tq is6700om bp9cbjyn']")).click();
+        String searchText = driver.findElement(By.xpath("//span[@class='a8c37x1j ni8dbmo4 stjgntxs l9j0dhe7 r8blr3vg']")).getText();
+        Assert.assertTrue(searchText.contains("People"), "Search not match");
+        logger.info("Hi, Successfully Click Link Text");
+        closeBrowser();
+    }
+
+    @Test(enabled = true)
+    public void commandPost() {  // XXX
+        setupBrowser("firefox", "https://www.facebook.com");
+        driver.findElement(By.xpath("//input[@aria-label='Email or Phone Number']")).sendKeys("Labonyo shahid");
+        driver.findElement(By.xpath("//input[@aria-label='Password']")).sendKeys("google.com");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+        //driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div/div[3]/div/div[4]/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[2]/div/div[1]/div[1]/div[1]/div[2]/span/span")).click(); // For Like
+
+        //driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div/div[3]/div/div[4]/div/div[3]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[2]/div/div[2]/div/div[1]/div[2]/span")).click(); // For Command button
+
+        driver.findElement(By.xpath("//div[@data-editor='bjhap']//div[@class='_1mf _1mj']")).sendKeys("Nice");
+        driver.findElement(By.xpath("//div[@data-editor='bjhap']//div[@class='_1mf _1mj']")).sendKeys(Keys.ENTER);
+
+        waitFor(5);
+//        driver.findElement(By.xpath("//span[normalize-space()='What's on your mind, Labonyo?']")).click();
+//
+//        driver.findElement(By.xpath("//div[@aria-label='Account']")).sendKeys("Hi its me");
+//        driver.findElement(By.xpath("//span[normalize-space()='Log Out']")).click();
+//        closeBrowser();
+    }
 }

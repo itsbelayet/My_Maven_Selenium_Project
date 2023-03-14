@@ -12,7 +12,7 @@ public class WebAPI {
     public String amazonUrl = "https://www.amazon.com/";
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp(){
         String chromeDriverPath = "BrowserDriver/windows/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
@@ -24,7 +24,7 @@ public class WebAPI {
 
     @AfterMethod
     public void tearDown() {
-        //driver.close();
-        driver.quit();
+        driver.close();
+        //driver.quit();
     }
 }

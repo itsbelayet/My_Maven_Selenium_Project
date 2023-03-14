@@ -8,20 +8,20 @@ public class HomePageWebElements extends WebAPI {
     public String searchToys = "toys";
     public String serchHand = "Hand Sanitizer";
     public String searchRolex = "rolex";
-    public String serchIphone = "iphone 12 pro max";
+    public String serchIphone = "iphone 13 pro max";
     public String serchComputer = "Desktop Computer";
 
     public String serchButtonWebElement = "#nav-search-submit-text > input";  // Search Box Button for Click
 
     // Actual Text
     public String toysActualTextWebElement = "//span[@class='a-color-state a-text-bold']";
-    public String actualProductRolex = "//*[@id=\"search\"]/span/div/span/h1/div/div[1]/div/div/span[3]";
-    public String actualProductHand = "//*[@id=\"search\"]/span/div/span/h1/div/div[1]/div/div/span[3]";
-    public String actualProductIphone = "//span[text()='\"iphone 12 pro max\"']";
+    public String actualProductRolex = "//span[contains(text(),'\"rolex\"')]";
+    public String actualProductHand = "//span[contains(text(),'\"Hand Sanitizer\"')]";
+    public String actualProductIphone = "//span[text()='\"iphone 13 pro max\"']";
     public String actualProductComputer="//*[@class=\"a-color-state a-text-bold\"]";
     // Login
     public String logInMail = "ap_email";
-    public String halloSignIn = "//span[text()='Hello, Sign in']";
+    public String halloSignIn = "//span[@id='nav-link-accountList-nav-line-1']";
     public String emailName = "mh.shahib@gmail.com";
     public String passwordButton = "//*[@id=\"ap_password\"]";
     public String passWord = "Test123456";

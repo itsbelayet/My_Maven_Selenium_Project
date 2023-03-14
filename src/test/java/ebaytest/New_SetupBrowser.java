@@ -32,7 +32,7 @@ public class New_SetupBrowser {
         driver.manage().window().maximize();
         driver.get(url);
     }
-    // For Local Invoirment
+    // For Local Environment
     private static WebDriver setupLocalDriver(String os, String browserName) {
         if (os.equalsIgnoreCase("mac")) {
             if (browserName.equalsIgnoreCase("chrome")) {
@@ -54,7 +54,7 @@ public class New_SetupBrowser {
         return driver;
     }
 
-    // For Cloud Invoirment
+    // For Cloud Environment
     private static WebDriver setupCloudDriver() throws MalformedURLException {
         String userName = "meronasgedom_GSMUOb";
         String accessKey = "hoBrfWKNz6SeMTLuYKGb";
